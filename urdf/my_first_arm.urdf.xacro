@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="my_first_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Basic dimensions -->
+  <xacro:property name="base_size" value="0.2"/>
+  <xacro:property name="link_length" value="0.5"/>
+  <xacro:property name="link_radius" value="0.04"/>
+
+  <!-- Base link -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <geometry>
+        <box size="${base_size} ${base_size} 0.1"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.1 0.3 0.8 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Arm link -->
+  <link name="link1">
+    <visual>
+      <origin xyz="0 0 ${link_length/2.0}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${link_radius}" length="${link_length}"/>
+      </geometry>
+      <material name="orange">
+        <color rgba="1.0 0.5 0.1 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Revolute joint -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="10" velocity="1.0"/>
+  </joint>
+
+</robot>
