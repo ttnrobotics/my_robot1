@@ -706,7 +706,6 @@ ready to copy into your `my_robot1` package.
 
 
 
-
 ## Fix the GIT problem in VSCODE when VScode try to automatically generate the .vscode folder
 
 ### 1. Add a proper `.gitignore`
