@@ -6,7 +6,7 @@ The best learning path is:
 4. run it in **Gazebo**
 5. then replace parts step by step to make your **custom robot**
 
-That matches the ROS 2 URDF workflow and Gazebo integration docs for Humble. The ROS 2 docs group URDF, xacro, robot_state_publisher, and Gazebo tutorials together, and Gazebo’s ROS integration for Humble is through `ros_gz` / Gazebo Sim rather than the old Classic workflow. ([ROS Documentation][1])
+That matches the ROS 2 URDF workflow and Gazebo integration docs for Humble. The ROS 2 docs group URDF, xacro, robot_state_publisher, and Gazebo tutorials together, and Gazebo’s ROS integration for Humble is through `ros_gz` / Gazebo Sim rather than the old Classic workflow. 
 
 ---
 
@@ -698,9 +698,3 @@ I can write the exact full files for you next:
 * `test_box.urdf`
 
 ready to copy into your `my_robot1` package.
-
-[1]: https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/URDF-Main.html?utm_source=chatgpt.com "URDF — ROS 2 Documentation: Humble documentation"
-[2]: https://docs.ros.org/en/humble/Tutorials/Intermediate/URDF/Using-URDF-with-Robot-State-Publisher-cpp.html?utm_source=chatgpt.com "Using URDF with robot_state_publisher (C++)"
-[3]: https://docs.ros.org/en/humble/p/ros_gz_sim/?utm_source=chatgpt.com "ros_gz_sim: Humble 0.244.23 documentation"
-[4]: https://gazebosim.org/docs/latest/ros_installation/?utm_source=chatgpt.com "Installing Gazebo with ROS"
-[5]: https://docs.ros.org/en/foxy/Tutorials/Intermediate/URDF/Using-Xacro-to-Clean-Up-a-URDF-File.html?utm_source=chatgpt.com "Using Xacro to clean up your code - URDF"
