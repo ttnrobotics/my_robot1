@@ -1,2 +1,2 @@
 # my_robot1
-My Franka panda robot
+My Franka panda manipulator in ROS2
