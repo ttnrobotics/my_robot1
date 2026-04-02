@@ -1,0 +1,93 @@
+<!-- This is the URDF definition for a simple 2-DOF robotic arm -->
+<robot name="two_dof_arm">
+
+  <!-- *********************** LINKS *********************** -->
+  <!-- Links are the rigid parts of the robot. -->
+
+  <!-- 1. The Base Link (The foundation) -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <material name="grey">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+    </collision>
+  </link>
+
+  <!-- 2. The First Arm Link (The "upper arm") -->
+  <link name="link1">
+    <visual>
+      <geometry>
+        <box size="0.5 0.1 0.1"/>
+      </geometry>
+      <origin xyz="0.25 0 0" rpy="0 0 0"/>
+      <material name="orange">
+        <color rgba="1.0 0.4 0.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.5 0.1 0.1"/>
+      </geometry>
+      <origin xyz="0.25 0 0" rpy="0 0 0"/>
+    </collision>
+     <inertial>
+        <mass value="1.0"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- 3. The Second Arm Link (The "forearm") -->
+  <link name="link2">
+    <visual>
+      <geometry>
+        <box size="0.4 0.08 0.08"/>
+      </geometry>
+      <origin xyz="0.2 0 0" rpy="0 0 0"/>
+      <material name="blue">
+        <color rgba="0.1 0.1 1.0 1.0"/>
+      </material>
+    </visual>
+    <collision>
+       <geometry>
+        <box size="0.4 0.08 0.08"/>
+      </geometry>
+      <origin xyz="0.2 0 0" rpy="0 0 0"/>
+    </collision>
+     <inertial>
+        <mass value="0.8"/>
+        <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- *********************** JOINTS *********************** -->
+  <!-- Joints connect the links and define how they can move. -->
+
+  <!-- 1. The First Joint (Connects base_link to link1) -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="10" velocity="1.0"/>
+  </joint>
+
+  <!-- 2. The Second Joint (Connects link1 to link2) -->
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0.5 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" effort="10" velocity="1.0"/>
+  </joint>
+
+</robot>
