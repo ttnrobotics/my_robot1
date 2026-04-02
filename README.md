@@ -698,3 +698,107 @@ I can write the exact full files for you next:
 * `test_box.urdf`
 
 ready to copy into your `my_robot1` package.
+
+
+
+
+
+
+
+
+
+## Fix the GIT problem in VSCODE when VScode try to automatically generate the .vscode folder
+
+### 1. Add a proper `.gitignore`
+
+In your repo root:
+
+```bash
+printf "build/\ninstall/\nlog/\n.vscode/\n__pycache__/\n*.pyc\n" > .gitignore
+```
+
+Then check:
+
+```bash
+cat .gitignore
+```
+
+---
+
+### 2. Remove generated folders from Git’s staging/index
+
+If you previously tried `git add .`, untrack the generated folders:
+
+```bash
+git rm -r --cached build install log .vscode 2>/dev/null
+```
+
+Then try:
+
+```bash
+git add .gitignore
+git add package.xml CMakeLists.txt src launch urdf config meshes scripts 2>/dev/null
+```
+
+This is better than `git add -A -- .` because it avoids unstable generated folders.
+
+---
+
+### 3. Check repo health
+
+Run:
+
+```bash
+git fsck --full
+```
+
+Git’s documentation says `git fsck` is the standard way to detect missing or corrupt objects. ([Git][2])
+
+If that reports errors, the repo may be corrupted.
+
+---
+
+### 4. Rebuild the Git index
+
+If `git fsck --full` is clean, rebuild the index:
+
+```bash
+rm -f .git/index
+git reset
+```
+
+Then add files again:
+
+```bash
+git add .gitignore
+git add src launch urdf config meshes scripts package.xml CMakeLists.txt 2>/dev/null
+```
+
+---
+
+### 5. If the problem is only one file
+
+Sometimes one file is changing constantly. Find unstaged changes repeatedly:
+
+```bash
+git status
+```
+
+If one file keeps changing by itself, exclude it for now or stop the program touching it.
+
+---
+
+### Best practical fix for your ROS 2 package
+
+From `~/master_ros2_ws/src/my_robot1`:
+
+```bash
+printf "build/\ninstall/\nlog/\n.vscode/\n__pycache__/\n*.pyc\n" > .gitignore
+git rm -r --cached build install log .vscode 2>/dev/null
+rm -f .git/index
+git reset
+git add .gitignore
+git add package.xml CMakeLists.txt
+git add src launch urdf config meshes scripts 2>/dev/null
+git status
+```
